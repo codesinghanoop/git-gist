@@ -4,13 +4,17 @@
   "private": true,
   "dependencies": {
     "@octokit/rest": "^18.0.9",
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "date-fns": "^2.29.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-octicon": "^3.0.1",
+    "react-redux": "^8.0.5",
     "react-scripts": "4.0.0",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
@@ -37,5 +41,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-error-overlay": "6.0.9"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }
