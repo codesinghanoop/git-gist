@@ -2,24 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Octicon from 'react-octicon'
 import Search from './Search';
-import { useAppDispatch } from '../state';
-import { fetchGistByUsername, fetchPublicGist } from '../state/gist';
+import { useHeader } from '../hooks/useHeader';
 
 function Header() {
-  const [userName, setUserName] = useState();
-  const dispatch = useAppDispatch();
-
-  const onChangeUsername = (e) => {
-    setUserName(e.currentTarget.value);
-  }
-
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      if(userName) return dispatch(fetchGistByUsername(userName));
-      return dispatch(fetchPublicGist());
-    }
-  }
-
+  const { onChangeUsername, onKeyDown } = useHeader();
+  
   return (
     <Wrapper>
       <Octicon name="mark-github" mega/>

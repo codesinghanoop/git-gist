@@ -7,6 +7,7 @@ const App = () => {
   return (
     <Wrapper className="App" data-testid="app">
       <Header />
+      {/* To display the list of public and user gist */}
       <GistList />
       <GlobalStyles />
     </Wrapper>

@@ -16,9 +16,10 @@ const persistConfig = {
   blacklist: [], //Items put here will not go to the localstorage.
   whitelist: ['gist'],
 }
-
+//Persisting state to store
 const persistedReducers = persistReducer(persistConfig, reducers);
 
+//Configuring store
 export const store = configureStore({
   reducer: persistedReducers,
   middleware: (getDefaultMiddleware) =>
@@ -36,7 +37,7 @@ let rehydrationComplete;
 export const rehydration = new Promise((resolve) => {
   rehydrationComplete = resolve;
 });
-
+//Retriving persisted store state
 export const persistor = persistStore(store, null, () => {
   rehydrationComplete();
 });

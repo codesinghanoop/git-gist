@@ -4,16 +4,19 @@ import { useGistList } from '../hooks/useGistList';
 import Gist from './Gist';
 
 const GistList = () => {
-    const { gist } = useGistList();
+    const { gist } = useGistList(); //Hook to fetch public gist
 
+    //When the data is in loading state
     if(gist?.requestStatus === 'pending') {
         return <p>Loading...</p>
     }
 
-    if(gist?.requestStatus === 'failed') {
+    //When the api failed due to 404, 400, 500 status code & when no search results are found
+    if(gist?.requestStatus === 'failed' || (gist?.gistData && gist?.gistData.length === 0)) {
         return <p>We couldn't find any gist, Please try again!</p>
     }
 
+    //Renders the list of pubic and user gist & <Gist /> is a gist row in gist list
     return (
     <Container>
       {gist?.gistData && gist?.gistData.map((item) => <Gist key={item?.id} gist={item} />)}

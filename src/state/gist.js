@@ -7,6 +7,7 @@ const initialState = {
   requestStatus: '',
 };
 
+//Thunk operation to handle api call to get public gist and can be called as a reduc action from component
 export const fetchPublicGist = createAsyncThunk(
   'fetch/publicGist',
   async (_, { rejectWithValue }) => {
@@ -20,6 +21,7 @@ export const fetchPublicGist = createAsyncThunk(
   }
 );
 
+//Thunk operation to handle api call to get user gist and can be called as a reduc action from component
 export const fetchGistByUsername = createAsyncThunk(
   'fetch/user/gist',
   async (payload, { rejectWithValue }) => {
@@ -33,12 +35,14 @@ export const fetchGistByUsername = createAsyncThunk(
   }
 );
 
+//Slice will manipulate store state and creates actions
 export const gistSlice = createSlice({
   name: 'gist',
   initialState,
   reducers: {
   },
   extraReducers(builder) {
+    //Manipulating public gist call status
     builder.addCase(fetchPublicGist.pending, (state, action) => {
       state.requestStatus = 'pending';
     });
@@ -49,6 +53,7 @@ export const gistSlice = createSlice({
     builder.addCase(fetchPublicGist.rejected, (state, action) => {
       state.requestStatus = 'failed';
     });
+    //Manipulating user gist call status
     builder.addCase(fetchGistByUsername.pending, (state, action) => {
       state.requestStatus = 'pending';
     });

@@ -10,6 +10,7 @@ const GistMeta = ({ gist }) => {
     const { files = {}, comments = 0, html_url } = gist;
     const fileLength = Object.keys(files)?.length;
 
+    //Function to return gist meta such as fork, files, comments
     const getMeta = (icon, count, metaName, link) => (
         <Meta target="_blank" href={link}>
           {icon}
@@ -20,34 +21,40 @@ const GistMeta = ({ gist }) => {
           {metaName}
         </Meta>
     )
-
     return (
         <GistMetaContainer>
-              {getMeta(<CodeIcon />, fileLength, 'Files', html_url)}  
+              {/* Files action */}
+              {getMeta(<CodeIcon />, fileLength, 'Files', html_url)}
+              {/* Fork action */}
               {getMeta(<Fork />, '', 'Forks', `${html_url}/forks`)}
+              {/* comment action */}
               {getMeta(<Comment />, comments, 'Comments', `${html_url}#comments`)}
+              {/* Star action */}
               {getMeta(<Star />, '', 'Stars', `${html_url}/stargazers`)}
         </GistMetaContainer>
     )
 }
 
 const GistFileFooter = ({ files = {} }) => {
+
+    //Func returns the file display
     const getFileEle = (file) => {
         const fileData = files[file];
         return (
-            <Meta target="_blank" href={fileData?.raw_url}>
+            <Meta key={fileData?.filename} target="_blank" href={fileData?.raw_url}>
                 <File />
                 <span style={{ marginLeft: 4 }} >{fileData?.filename}</span>
             </Meta>
         )
     }
+    //Returns the max 3 files and display at the bottom of gist row
     return (
         <FooterContainer>
             {Object.keys(files)?.slice(0, 3).map((file) => getFileEle(file))}
         </FooterContainer>
     )
 }
-
+//This is the main gist row component
 const Gist = ({ gist }) => {
     const avatar = gist?.owner?.avatar_url;
     const ownerName = gist?.owner?.login;
@@ -57,6 +64,7 @@ const Gist = ({ gist }) => {
 
     return (
         <Row>
+            {/* Row header */}
             <ImageFlex>
               <ImageContainer>
                 <Img src={avatar} alt='User Avatar' />
@@ -64,11 +72,13 @@ const Gist = ({ gist }) => {
               </ImageContainer>
               <GistMeta gist={gist} />
             </ImageFlex>
+            {/* Row Body */}
             <DateFlex>
               <Text>Created at: {createAt}</Text>
               <Text>Last Updated: {updatedAt}</Text>
             </DateFlex>
             {des && <span style={{ fontSize: 16,marginBottom: 12 }} >{des}</span>}
+            {/* Row Footer */}
             <GistFileFooter files={gist.files} />
         </Row>
     )

@@ -8,11 +8,12 @@ export const useGistList = () => {
 
     const gist = useAppState((state) => state.gist);
 
+    //Fetches the public gist on component mount
     useEffect(() => {
         dispatch(fetchPublicGist());
     }, []);
 
     return {
-        gist
+      gist
     }
 }
