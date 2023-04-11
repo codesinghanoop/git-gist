@@ -19,7 +19,7 @@ const GistList = () => {
     //Renders the list of pubic and user gist & <Gist /> is a gist row in gist list
     return (
     <Container>
-      {gist?.gistData && gist?.gistData.map((item) => <Gist key={item?.id} gist={item} />)}
+      {Array.isArray(gist?.gistData) && gist?.gistData.map((item) => <Gist key={item?.id} gist={item} />)}
     </Container>
     )
 }

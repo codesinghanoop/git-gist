@@ -3,7 +3,7 @@ import { getPublicGists, getGistForUser } from '../services/gistService';
 
 const initialState = {
   username: '',
-  gistData: {},
+  gistData: [],
   requestStatus: '',
 };
 
